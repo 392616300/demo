@@ -1,0 +1,152 @@
+{
+    "msg": "string",
+    "obj": {
+        "imgsHostDomain": "string",
+        "list": [
+            {
+                "commentCnt": 0,
+                "content": "string",
+                "contentMap": {},
+                "createTime": "2016-11-14T06:05:52.038Z",
+                "creatorAvatar": "img/user-img-3.jpg",
+                "creatorId": 0,
+                "creatorNickname": "string",
+                "eventList": [
+                    {
+                        "id": 0,
+                        "name": "string",
+                        "topicId": 0
+                    }
+                ],
+                "favoriteCnt": 0,
+                "groupList": [
+                    {
+                        "id": 0,
+                        "name": "string",
+                        "topicId": 0
+                    }
+                ],
+                "imgsHostDomain": "string",
+                "isFav": 0,
+                "isLike": 0,
+                "isOfficial": 0,
+                "isPk": 0,
+                "likeCnt": 0,
+                "showTime": "string",
+                "topicId": 0,
+                "type": 0,
+                "voteCnt": 0
+            }
+        ],
+        "pkId": 0,
+        "topicVo": {
+            "commentCnt": 0,
+            "content": "string",
+            "contentMap": {},
+            "createTime": "2016-11-14T06:05:52.038Z",
+            "creatorAvatar": "img/user-img-3.jpg",
+            "creatorId": 0,
+            "creatorNickname": "string",
+            "eventList": [
+                {
+                    "id": 0,
+                    "name": "string",
+                    "topicId": 0
+                }
+            ],
+            "favoriteCnt": 0,
+            "groupList": [
+                {
+                    "id": 0,
+                    "name": "string",
+                    "topicId": 0
+                }
+            ],
+            "imgsHostDomain": "string",
+            "isFav": 0,
+            "isLike": 0,
+            "isOfficial": 0,
+            "isPk": 0,
+            "likeCnt": 0,
+            "showTime": "string",
+            "topicId": 0,
+            "type": 0,
+            "voteCnt": 0
+        }
+    },
+    "path": {
+        "imgsHostDomain": "string",
+        "list": [
+            {
+                "commentCnt": 0,
+                "content": "string",
+                "contentMap": {},
+                "createTime": "2016-11-14T06:05:52.038Z",
+                "creatorAvatar": "img/user-img-3.jpg",
+                "creatorId": 0,
+                "creatorNickname": "string",
+                "eventList": [
+                    {
+                        "id": 0,
+                        "name": "string",
+                        "topicId": 0
+                    }
+                ],
+                "favoriteCnt": 0,
+                "groupList": [
+                    {
+                        "id": 0,
+                        "name": "string",
+                        "topicId": 0
+                    }
+                ],
+                "imgsHostDomain": "string",
+                "isFav": 0,
+                "isLike": 0,
+                "isOfficial": 0,
+                "isPk": 0,
+                "likeCnt": 0,
+                "showTime": "string",
+                "topicId": 0,
+                "type": 0,
+                "voteCnt": 0
+            }
+        ],
+        "pkId": 0,
+        "topicVo": {
+            "commentCnt": 0,
+            "content": "string",
+            "contentMap": {},
+            "createTime": "2016-11-14T06:05:52.038Z",
+            "creatorAvatar": "string",
+            "creatorId": 0,
+            "creatorNickname": "string",
+            "eventList": [
+                {
+                    "id": 0,
+                    "name": "string",
+                    "topicId": 0
+                }
+            ],
+            "favoriteCnt": 0,
+            "groupList": [
+                {
+                    "id": 0,
+                    "name": "string",
+                    "topicId": 0
+                }
+            ],
+            "imgsHostDomain": "string",
+            "isFav": 0,
+            "isLike": 0,
+            "isOfficial": 0,
+            "isPk": 0,
+            "likeCnt": 0,
+            "showTime": "string",
+            "topicId": 0,
+            "type": 0,
+            "voteCnt": 0
+        }
+    },
+    "resultCode": 0
+}

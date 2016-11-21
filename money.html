@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="target-densitydpi=device-dpi,width=750,user-scalable=no" name="viewport">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="msapplication-tap-highlight" content="no">
+    <link rel="stylesheet" type="" href="css/bouns.css">
+    <title>金额明细</title>
+</head>
+<body>
+    <div class="list-Wrap">
+    	<div class="btn-back" onclick="javascript:history.go(-1);"></div>
+        <ul class="money-list">
+            <script id="moneyList" type="text/html">
+                {{each cashlList as value i}}
+                    <li >
+                        <div>
+                            <p>通过{{value.topicSlogan}}</p>
+                            <p>投票获得冠军</p>
+                        </div>
+                        <span class="moneyNum">${{value.prizeName}}</span>
+                    </li>
+                {{/each}}
+            </script>
+        </ul>
+    </div>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/template.js"></script>
+	<script type="text/javascript" src="js/util.js"></script>
+   <script>
+    _getService({
+    	
+//  	模拟的数据
+//  	url:"mock/bonus.json",
+//		type:"GET"
+		
+//		接口
+        url: api_url+'user/authApi/myPrize/list',
+        data: {
+        	accessToken: store.get('statusInfo').accessToken,
+			clientDigest: store.get('statusInfo').clientDigest
+        }
+    }).then(function (data) {
+    	console.log(data);
+        if (data.resultCode == 1) {
+           
+            if (!$.isEmptyObject(data.obj) && !$.isEmptyObject(data.obj.cashlList)) {
+                var moneyhtml = template('moneyList', data.obj);
+				$(".money-list").html(moneyhtml);
+            }
+          
+        } else if (data.resultCode == 0) {
+            if (data.msg) {
+                toast(data.msg);
+            } else {
+
+                toast('服务器连接失败');
+
+            }
+        } else if (data.resultCode == -1) {
+            toast('没有登录，请从校谱app登录');
+        }
+    }).catch(function(err){
+        console.log(err);
+    });
+
+</script>
+</body>
+</html>

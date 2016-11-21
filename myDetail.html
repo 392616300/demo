@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="target-densitydpi=device-dpi,width=750,user-scalable=no" name="viewport">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no, email=no" />
+		<meta name="msapplication-tap-highlight" content="no">
+		<link rel="stylesheet" href="css/myDetail.css">
+		<link rel="stylesheet" href="css/common.css" />
+		<title>图文详情</title>
+	</head>
+
+	<body class="keBody">
+		<h1 class="keTitle"></h1>
+		<div class="kePublic">
+			<!--效果html开始-->
+			<div class="user-logo">
+				<img src="img/user-img-4.jpg" />
+				<div>
+					<p class="user-name">校谱</p>
+					<p class="user-time"></p>
+				</div>
+			</div>
+			<div class="main_visual">
+				<div class="flicking_con">
+
+				</div>
+				<div class="main_image">
+					<ul class="myDetail-list">
+						<script id="myDetailList" type="text/html">
+							{{each contentMap.urls as value i}}
+							<li><img style="width: 100%;height: auto;" src="{{imgsHostDomain}}{{value}}" /></li>
+							{{/each}}
+						</script>
+
+					</ul>
+					<a href="javascript:;" id="btn_prev"></a>
+					<a href="javascript:;" id="btn_next"></a>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<div class="text-wrap">
+				<div class="main-text">校谱有你更精彩</div>
+				<div class="praise"></div>
+			</div>
+		</div>
+
+		<!------底部banner----->
+		<nav class="common-app">
+			<div class="qrcode">
+				<img src="img/logo-xiaopu.png">
+				<div>
+					<p>校谱</p>
+					<p>不做宅一族</p>
+				</div>
+			</div>
+			<div class="download-wrap">
+				<button class="app-open">打开</button>
+				<button class="app-download">下载</button>
+			</div>
+		</nav>
+
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="js/util.js"></script>
+		<script type="text/javascript" src="js/jquery.event.drag-1.5.min.js"></script>
+		<script type="text/javascript" src="js/jquery.touchSlider.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript">
+			var myTopicId = decodeURI(GetQueryString("topicId"));
+			_getService({
+
+				/*模拟数据
+				//url: "mock/myDetail.json",
+				//type: "GET"
+				测试 topicId =13*/
+
+				//-------------接口
+				url: api_url + "topic/view",
+				data: {
+					topicId: myTopicId
+				}
+			}).then(function(data) {
+				myDetailObj = data;
+				console.log(data);
+				if(data.resultCode == 1 && data.obj.type == 1 && !$.isEmptyObject(data.obj) && !$.isEmptyObject(data.obj.contentMap) && data.obj.contentMap.urls.length != 0) {
+					var LiLength = data.obj.contentMap.urls.length;
+					var html = template('myDetailList', data.obj);
+					$(".myDetail-list").html(html);
+					$(".main-text").text(data.obj.contentMap.desc);
+					$(".user-logo img").attr("src", data.obj.imgsHostDomain + data.obj.creatorAvatar);
+					$(".user-name").text(data.obj.creatorNickname);
+					$(".user-time").text(data.obj.showTime);
+				} else {
+					toast("请求失败");
+				}
+				//-------------微信分享
+				shareTitle = "[校谱]我分享了“" + data.obj.creatorNickname + "“的图片";
+				shareDesc = "这是我的本月佳作（" + data.obj.contentMap.desc + "）";
+				shareImg = host_url + "img/wxShare.png";
+				xiaopuJsShare();
+				return LiLength;
+			}).then(function(LiLength) {
+
+				var navHtml = "";
+				for(var i = 1; i < LiLength + 1; i++) {
+					navHtml += '<a href="#">' + i + '</a>';
+				}
+				$(".flicking_con").append(navHtml);
+
+				$(".main_visual").hover(function() {
+					$("#btn_prev,#btn_next").fadeIn()
+				}, function() {
+					$("#btn_prev,#btn_next").fadeOut()
+				});
+
+				$dragBln = false;
+
+				$(".main_image").touchSlider({
+					flexible: true,
+					speed: 200,
+					btn_prev: $("#btn_prev"),
+					btn_next: $("#btn_next"),
+					paging: $(".flicking_con a"),
+					counter: function(e) {
+						$(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
+						$('.keTitle').html((e.current) + '/' + LiLength);
+					}
+
+				});
+
+				$(".main_image").bind("mousedown", function() {
+					$dragBln = false;
+				});
+
+				$(".main_image").bind("dragstart", function() {
+					$dragBln = true;
+				});
+
+				$(".main_image a").click(function() {
+					if($dragBln) {
+						return false;
+					}
+				});
+
+				timer = setInterval(function() {
+					$("#btn_next").click();
+				}, 5000);
+
+				$(".main_visual").hover(function() {
+					clearInterval(timer);
+				}, function() {
+					timer = setInterval(function() {
+						$("#btn_next").click();
+					}, 5000);
+				});
+
+				$(".main_image").bind("touchstart", function() {
+					clearInterval(timer);
+				}).bind("touchend", function() {
+					timer = setInterval(function() {
+						$("#btn_next").click();
+					}, 5000);
+				});
+				
+
+			}).catch(function(err) {
+				console.log(err);
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="target-densitydpi=device-dpi,width=750,user-scalable=no" name="viewport">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no, email=no" />
+		<meta name="msapplication-tap-highlight" content="no">
+		<link rel="stylesheet" type="text/css" href="css/voteEnd.css" />
+		<title>活动结束页面</title>
+	</head>
+
+	<body>
+		<!--header-->
+		<header class="common-header">
+			<div class="common-imgWrap1">
+				<img src="img/fanhui@2x.png" />
+			</div>
+			<p class="common-title">谁是手绘达人</p>
+			<div class="common-imgWrap2">
+				<img src="img/share@2x.png" />
+			</div>
+		</header>
+		<!--content-->
+		<section class="vote-end-main content">
+			<!--<script id="voteEndHead" type="text/html">-->
+			<p class="vote-end-imgNum">投票已结束</p>
+			<!--头部banner区域-->
+			<div class="vote-end-picWrap" id="vote-end-picWrap2">
+				<img class="myHeadBg" src="img/2.png" />
+				<video width="750" height="500" controls poster="#" id="videoId" src=""></video>
+				<img class="vote-end-authorImg" src="img/user-img-1.jpg">
+				<div class="vote-end-details">
+					<div class="vote-end-author">
+						<p id="headName">双笙</p>
+						<p><span id="headNum">100</span>票</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="vote-end-nav">
+				<div class="praise"><span></span></div>
+				<div class="discuss"><span></span></div>
+				<div class="star"></div>
+			</div>
+			<!--</script>-->
+
+			<div class="vote-end-content">
+				<ul class="top-list">
+					<script id="topList" type="text/html">
+						{{each arr as value i}}
+						<li class="top-item {{value.voteClass}}" id="{{i}}">
+							<img src="{{value.path+value.userImages}}">
+							<div class="item-center">
+								<p><i class="cup"></i>{{i+1}} {{value.nickName}}</p>
+								<div><span style="width: {{value.voteCntNum}}%;"></span></div>
+							</div>
+							<div class="item-right">
+								<i class="vote"></i>
+								<span>{{value.voteCnt}}票</span>
+							</div>
+							<i class="item-icon"></i>
+						</li>
+						{{/each}}
+					</script>
+				</ul>
+				<div class="other-top-wrap">
+					<ul class="other-top clear">
+						<script id="otherList" type="text/html">
+							{{each arrOther as value i}}
+							<li class="other-item" id="{{i+3}}">
+								<img src="{{value.path+value.userImages}}">
+								<div>
+									<i></i>
+									<span>{{i+4}}</span>
+									<p>{{value.nickName}}</p>
+								</div>
+							</li>
+							{{/each}}
+						</script>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<!--footer-->
+		<footer class="common-footer">
+			投票规则
+		</footer>
+
+		<div class="common-mask">
+			<!--投票规则界面-->
+			<div class="common-voteRule">
+				<img src="img/guanbi@2x.png" class="voteRule-closeImg" />
+				<p class="voteRule-title">投票规则</p>
+				<div class="voteRule-content">
+					<p class="rule1">投票主题:手绘挑战谁最美</p>
+					<p class="rule2">投票截止时间:<span>2016/11/11/24:00</span></p>
+					<p class="rule3">投票奖励:现金-1000元</p>
+					<p class="rule4">说明:此奖励在参加人数达到两人，</p>
+					<p class="rule5">投票人数达到50人生效</p>
+					<p class="rule6">奖励方式:最高者得</p>
+					<span></span>
+				</div>
+			</div>
+		</div>
+
+		<!------底部banner----->
+		<nav class="common-app">
+			<div class="qrcode">
+				<img src="img/logo-xiaopu.png">
+				<div>
+					<p>校谱</p>
+					<p>不做宅一族</p>
+				</div>
+			</div>
+			<div class="download-wrap">
+				<button class="app-open">打开</button>
+				<button class="app-download">下载</button>
+			</div>
+		</nav>
+
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="js/util.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript">
+			var mypkId = decodeURI(GetQueryString("pkId"));
+			var myTitle = decodeURI(GetQueryString("title"));
+			var userIndex = parseInt(decodeURI(GetQueryString("userIndex")));
+			var myType = parseInt(decodeURI(GetQueryString("type")));
+			var theType = "图片";
+			if(myType == 2) {
+				theType = "视频";
+			}
+			//-------------微信分享
+			shareTitle = '[校谱]我分享了“' + myTitle + '“的' + theType + '-不服来战';
+			shareDesc = "投票奖励：现金100元   说明：此奖励在参加人数...";
+			shareImg = host_url + "img/wxShare.png";
+			xiaopuJsShare();
+
+			_getService({
+
+				//模拟的数据
+				//url: "mock/voteEnd.json",
+				//type: "GET"
+
+				//接口
+				url: api_url + "voteResult/view",
+				data: {
+					topicId: 187
+				}
+			}).then(function(data) {
+				console.log(data);
+				if(data.resultCode == 1 && data.obj.length != 0) {
+					
+					document.title=data.obj[userIndex].slogan;
+					$(".common-title").text(data.obj[userIndex].slogan);
+					//计算总票数
+					var sumNum = 0,
+						i = 0;
+					for(i = 0; i < data.obj.length; i++) {
+						sumNum += data.obj[i].voteCnt;
+					}
+					var topList = data.obj.slice(0, 3);
+					var otherList = data.obj.slice(3, 999);
+					if(myType == 1) {
+						$("#videoId").hide();
+						$(".myHeadBg").attr("src", data.obj[userIndex].path + data.obj[userIndex].contentMap.urls[0]);
+					} else if(myType == 2) {
+						$(".myHeadBg").hide();
+						$("#videoId").attr("poster", data.obj[userIndex].path + data.obj[userIndex].contentMap.urls[1]);
+						$("#videoId").attr("src", data.obj[userIndex].path + data.obj[userIndex].contentMap.urls[0]);
+					}
+					$(".vote-end-authorImg").attr("src", data.obj[userIndex].path + data.obj[userIndex].userImages);
+					$("#headName").text(data.obj[userIndex].userName);
+					$("#headNum").text(data.obj[userIndex].voteCnt);
+					$(".praise span").text(data.obj[userIndex].likeCnt);
+					for(var i in topList) {
+						topList[i].voteCntNum = topList[i].voteCnt / sumNum * 100;
+						if(i == 0) {
+							topList[i].voteClass = "vote-end-first";
+						} else if(i == 1) {
+							topList[i].voteClass = "vote-end-second";
+						} else if(i == 2) {
+							topList[i].voteClass = "vote-end-third";
+						}
+					}
+					var tophtml = template('topList', {
+						"arr": topList
+					});
+					$(".top-list").html(tophtml);
+					var otherhtml = template('otherList', {
+						"arrOther": otherList
+					});
+					$(".other-top").html(otherhtml);
+				} else {
+					toast("请求失败");
+				}
+				return data;
+			}).then(function(data) {
+				$(".common-footer").on("touchstart", function() {
+					$(".common-mask").toggle();
+				});
+				$(".voteRule-closeImg").on("touchstart", function() {
+					$(".common-mask").toggle();
+				});
+				$(".vote-end-nav .star").on("touchstart", function() {
+					$(this).toggleClass("on");
+				});
+				$(".vote-end-nav .praise").on("touchstart", function() {
+					$(this).toggleClass("on");
+				});
+				$(".other-top").css({
+					"width": $(".other-top").find("li").length * 148 + "px"
+				});
+				$(".common-app .close").on("touchstart", function() {
+					$(".common-app").toggle();
+				});
+				$(".top-list li,.other-top li").on("touchstart", function() {
+					console.log($(this).attr("id"));
+					var id = $(this).attr("id");
+					if(myType == 1) {
+						$("#videoId").hide();
+						$(".myHeadBg").attr("src", data.obj[id].path + data.obj[id].contentMap.urls[0]);
+					} else if(myType == 2) {
+						$(".myHeadBg").hide();
+						$("#videoId").attr("poster", data.obj[id].path + data.obj[id].contentMap.urls[1]);
+						$("#videoId").attr("src", data.obj[id].path + data.obj[id].contentMap.urls[0]);
+					}
+					$(".vote-end-authorImg").attr("src", data.obj[id].path + data.obj[id].userImages);
+					$("#headName").text(data.obj[id].userName);
+					$("#headNum").text(data.obj[id].voteCnt);
+					$(".praise span").text(data.obj[id].likeCnt);
+				})
+			}).catch(function(err) {
+				console.log(err);
+			});
+		</script>
+
+	</body>
+	<html>

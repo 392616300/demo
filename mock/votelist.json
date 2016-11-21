@@ -1,0 +1,93 @@
+{
+  "msg": "string",
+  "obj": {
+    "imgsHostDomain": "string",
+    "list": [
+      {
+        "avatarUrl": "img/user-img-2.jpg",
+        "imgsHostDomain": "string",
+        "nickName": "王大锤",
+        "topicId": 0,
+        "voteCnt": 15
+      },
+      {
+        "avatarUrl": "img/user-img-2.jpg",
+        "imgsHostDomain": "string",
+        "nickName": "张珊",
+        "topicId": 0,
+        "voteCnt": 15
+      },
+      {
+        "avatarUrl": "img/user-img-2.jpg",
+        "imgsHostDomain": "string",
+        "nickName": "李四",
+        "topicId": 0,
+        "voteCnt": 15
+      },
+      {
+        "avatarUrl": "img/user-img-2.jpg",
+        "imgsHostDomain": "string",
+        "nickName": "王五",
+        "topicId": 0,
+        "voteCnt": 15
+      },
+      {
+        "avatarUrl": "img/user-img-3.jpg",
+        "imgsHostDomain": "string",
+        "nickName": "宋喆",
+        "topicId": 0,
+        "voteCnt": 15
+      },
+      {
+        "avatarUrl": "img/user-img-2.jpg",
+        "imgsHostDomain": "string",
+        "nickName": "宝强",
+        "topicId": 0,
+        "voteCnt": 15
+      },
+      {
+        "avatarUrl": "img/user-img-2.jpg",
+        "imgsHostDomain": "string",
+        "nickName": "王大锤",
+        "topicId": 0,
+        "voteCnt": 15
+      },
+      {
+        "avatarUrl": "img/user-img-2.jpg",
+        "imgsHostDomain": "string",
+        "nickName": "王大锤",
+        "topicId": 0,
+        "voteCnt": 15
+      },
+      {
+        "avatarUrl": "img/user-img-2.jpg",
+        "imgsHostDomain": "string",
+        "nickName": "王大锤",
+        "topicId": 0,
+        "voteCnt": 15
+      },
+      {
+        "avatarUrl": "img/user-img-2.jpg",
+        "imgsHostDomain": "string",
+        "nickName": "王大锤",
+        "topicId": 0,
+        "voteCnt": 15
+      }
+    ],
+    "topicId": 0
+  },
+  "path": {
+    "imgsHostDomain": "string",
+    "list": [
+      {
+        "avatarUrl": "string",
+        "imgsHostDomain": "string",
+        "nickName": "string",
+        "topicId": 0,
+        "voteCnt": 0
+      }
+    ],
+    "topicId": 0
+  },
+  "resultCode": 0
+}

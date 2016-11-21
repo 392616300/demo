@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="target-densitydpi=device-dpi,width=750,user-scalable=no" name="viewport">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no, email=no" />
+		<meta name="msapplication-tap-highlight" content="no">
+		<link rel="stylesheet" href="css/bouns.css">
+		<script src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script src="js/util.js"></script>
+		<title>我的奖励</title>
+		<script>
+		</script>
+	</head>
+
+	<body>
+		<section class="view view-bouns">
+			<div class="bouns-area">
+				<div class="wallet"></div>
+				<span class="money">￥100</span>
+				<div class="btn-default">我要提现</div>
+				<div class="detail">查看明细</div>
+			</div>
+		</section>
+
+		<section class="line"><span>领取奖品</span></section>
+
+		<section class="view-prize">
+			<ul class="prize-list">
+				<script id="prizeList" type="text/html">
+					{{each physicalList as value i}}
+					<li class="prize-item" id="{{value.prizeId}}-{{value.topicId}}">
+						<a href="#">
+							<img src="{{value.imgsHostDomain+value.prizeMap.imgs[0]}}" width="200" height="200" alt="">
+						</a>
+						<span>{{value.prizeName}}</span>
+					</li>
+					{{/each}}
+				</script>
+
+			</ul>
+		</section>
+
+		<script>
+			var getAccessToken = GetQueryString("accessToken");
+			var getClientDigest = GetQueryString("clientDigest");
+			store.set('statusInfo', {
+				'accessToken': getAccessToken,
+				'clientDigest': getClientDigest
+			});
+
+			_getService({
+
+				//  	模拟的数据
+				//  	url:"mock/bonus.json",
+				//		type:"GET"
+
+				//		接口
+				url: api_url + 'user/authApi/myPrize/list',
+				//      url:"http://10.25.19.47:8080/user/authApi/myPrize/list",
+				data: {
+					accessToken: getAccessToken,
+					clientDigest: getClientDigest
+				}
+			}).then(function(data) {
+				console.log(data);
+				if(data.resultCode == 1) {
+					//奖品list渲染
+					if(!$.isEmptyObject(data.obj) && !$.isEmptyObject(data.obj.physicalList)) {
+						var html = template('prizeList', data.obj);
+						$(".prize-list").html(html);
+
+					}
+					//现金数量
+					if(!$.isEmptyObject(data.obj) && $.isNumeric(data.obj.cashNum)) {
+						$('.money').html("￥ " + data.obj.cashNum);
+					}
+				} else if(data.resultCode == 0) {
+					if(data.msg) {
+						toast(data.msg);
+					} else {
+
+						toast('服务器连接失败');
+
+					}
+				} else if(data.resultCode == -1) {
+					toast('没有登录，请从校谱app登录');
+				}
+			}).then(function() {
+				//数据渲染完了，绑定事件
+				$('.detail').on('touchstart click', function() {
+					window.location.href = "money.html";
+				});
+
+				$(".prize-list li").on("touchstart click", function() {
+					var myId = $(this).attr("id").split("-");
+					window.location.href = "bounsDetail.html?prizeId=" + myId[0] + "&topicId=" + myId[1];
+				});
+			}).catch(function(err) {
+				console.log(err);
+			});
+			$(".btn-default").bind("touchstart", function() {
+				toast("暂未开放");
+			});
+		</script>
+	</body>
+
+</html>

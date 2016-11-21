@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="target-densitydpi=device-dpi,width=750,user-scalable=no" name="viewport">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no, email=no" />
+		<meta name="msapplication-tap-highlight" content="no">
+		<link rel="stylesheet" href="css/bouns.css">
+		<script src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script src="js/util.js"></script>
+		<title>奖励详情</title>
+	</head>
+
+	<body class="bonusDetail">
+		<script id="bonusDetailList" type="text/html">
+			<div class="head-bg">
+				<div class="btn-back" onclick="javascript:history.go(-1);"></div>
+				<div class="img-mask"></div>
+				<img src="{{imgsHostDomain+prizeMap.imgs[0]}}" />
+			</div>
+			<section class="prize-main">
+				<div class="prize-name">
+					<p>奖品名字：<span>{{prizeName}}</span></p>
+					<p>数量：<span>{{prizeNum}}</span></p>
+				</div>
+				<div class="prize-slogan">
+					<p>奖品描述：<span>{{topicSlogan}}</span></p>
+				</div>
+				<div class="prize-detail">
+					<p class="title">领取说明:</p>
+					<p>我们的校园工作人员会在您获得奖品的48小时内与您取得联系，凭借下方二维码获得奖品。</p>
+					{{if !hasTake}}
+					<img src="{{imgsHostDomain+code}}" />
+					{{/if}}
+					{{if hasTake}}
+					<p class="get-prize">奖品已领取</p>
+					{{/if}}
+				</div>
+			</section>
+		</script>
+		<script>
+			var myprizeId = parseInt(decodeURI(GetQueryString("prizeId")));
+			var mytopicId = parseInt(decodeURI(GetQueryString("topicId")));
+
+			function getNewService() {
+				_getService({
+					//-----模拟数据
+					//    	url:"mock/bonusDetail.json",
+					//		type:"GET"
+					//------接口
+					url:api_url +'prize/authApi/myPrize/view',
+//					url:"http://10.25.19.47:8080/prize/authApi/myPrize/view",
+					data: {
+						accessToken: store.get('statusInfo').accessToken,
+						clientDigest: store.get('statusInfo').clientDigest,
+						prizeId: myprizeId,
+						topicId: mytopicId
+					}
+				}).then(function(data) {
+					console.log(data);
+					
+					if(data.resultCode == 1) {
+						//奖品详情渲染
+						if(!$.isEmptyObject(data.obj)) {	
+						//--------如果奖品已经领取,取消定制器
+							if(data.obj.hasTake){
+								window.clearInterval(setTime);
+							}
+							var html = template('bonusDetailList', data.obj);
+							$(".bonusDetail").html(html);
+						}
+					} else if(data.resultCode == 0) {
+						if(data.msg) {
+							toast(data.msg);
+						} else {
+							toast('服务器连接失败');
+
+						}
+					} else if(data.resultCode == -1) {
+						toast('没有登录，请从校谱app登录');
+					}
+				}).then(function() {
+					//数据渲染完了，绑定事件
+
+				}).catch(function(err) {
+					console.log(err);
+				});
+			}
+			getNewService();
+			var setTime =setInterval("getNewService()",10000);
+		</script>
+	</body>
+
+</html>

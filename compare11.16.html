@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="target-densitydpi=device-dpi,width=750,user-scalable=no" name="viewport">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no, email=no" />
+		<meta name="msapplication-tap-highlight" content="no">
+		<link rel="stylesheet" type="text/css" href="css/compare.css" />
+		<link rel="stylesheet" href="css/common.css" />
+
+		<title>比一比主页</title>
+	</head>
+
+	<body>
+		<!--蒙板-->
+		<div class="compare-mask2">
+			<!--投票规则界面-->
+			<div class="compare-voteRule">
+				<img src="img/guanbi@2x.png" class="voteRule-closeImg" />
+				<p class="voteRule-title">投票规则</p>
+				<div class="voteRule-content">
+					<p class="rule1"></p>
+					<p class="rule2">投票截止时间:<span class="rule-voteEndTime"></span></p>
+					<p class="rule3">投票奖励：<span class="prizeType"></span>-<span class="prizeName"></span></p>
+					<p class="rule4">说明:此奖励在参加人数达到两人，</p>
+					<p class="rule5">投票人数达到50人生效</p>
+					<p class="rule6">奖励方式:最高者得</p>
+				</div>
+			</div>
+		</div>
+		<div class="compare-mask">
+
+			<!--投票界面-->
+			<div class="compare-voteing">
+
+				<img src="img/guanbi@2x.png" class="voteing-closeImg" />
+				<div class="voteing-img">
+
+				</div>
+				<div class="voteing-message">
+					<div class="voteing-authorImg">
+
+					</div>
+					<p class="voteing-authorName">作者：<span>杨梅</span></p>
+					<img src="img/right@2x.png" class="voteing-rightIcon" />
+					<p class="voteing-voteEnd">您已将票投给当前作品</p>
+				</div>
+			</div>
+
+			<!--投票详情-->
+			<div class="compare-voteDetails">
+				<img src="img/guanbi@2x.png" class="voteDetails-closeImg" />
+				<div class="voteDetails-title">
+					<p>投票情况</p>
+				</div>
+				<div class="voteDetails-sort">
+					<!---->
+					<div class="voteDetails-content">
+						<ul class="top-list">
+
+							<!--each-->
+							<script type="text/html" id="voteList">
+
+								{{each voteListArr as value i}}
+								<li class="top-item voteDetails-first">
+									<img src="{{value.imgsHostDomain+value.avatarUrl}}">
+									<div class="item-center">
+										<p class="item-voteContent"><i class="cupImg"></i>{{value.voteRank}} {{value.nickName}}</p>
+										<div><span style="width:{{value.voteCnt%100}}%;" class="bar"></span></div>
+									</div>
+									<div class="item-right">
+										<i class="vote"></i>
+										<span>{{value.voteCnt}}</span>
+									</div>
+								</li>
+								{{/each}}
+
+							</script>
+							<!--each-->
+
+						</ul>
+					</div>
+
+					<!---->
+				</div>
+			</div>
+
+		</div>
+		<!--头部-->
+		<div class="compare-header">
+			<div class="compare-imgWrap1">
+				<img src="img/fanhui@2x.png" />
+			</div>
+			<p class="compare-title">谁是手绘达人</p>
+			<div class="compare-imgWrap2">
+				<img src="img/share@2x.png" />
+			</div>
+		</div>
+		<!--主体-->
+		<div class="compare-main">
+			<p class="compare-imgNum"><span class="compare-span1">10</span>/<span class="compare-span2">10</span></p>
+
+			<div class="copmare-picWrap" id="copmare-picWrap1">
+				<!--图标-->
+				<img src="img/toupiao1@2x.png" class="compare-voteImg" />
+				<!--投票详情-->
+				<div class="copmare-authorImg"><img src="" id="authorImg1" /></div>
+				<div class="compare-details">
+
+					<div class="compare-author">
+						<p class="compare-authorName" id="compare-authorName1">双笙ssssss</p>
+						<p class="compare-vateNum" id="compare-vateNum1">100票</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="copmare-picWrap" id="copmare-picWrap2">
+				<!--图标-->
+				<img src="img/toupiao1@2x.png" class="compare-voteImg" />
+				<!--投票详情-->
+				<div class="copmare-authorImg"><img src="" id="authorImg2" /></div>
+				<div class="compare-details">
+
+					<div class="compare-author">
+						<p class="compare-authorName" id="compare-authorName2">双笙</p>
+						<p class="compare-vateNum" id="compare-vateNum2">100票</p>
+					</div>
+				</div>
+			</div>
+			<div class="copmare-shadow1">
+
+			</div>
+			<div class="copmare-shadow2">
+
+			</div>
+
+		</div>
+
+		<!--脚部-->
+		<div class="compare-footer">
+			<p class="compare-footerLeft">投票规则</p>
+			<div class="compare-voteBtn">
+				<p>我要参加</p>
+			</div>
+			<p class="compare-footerRight">投票情况</p>
+		</div>
+
+		<!------底部banner----->
+		<nav class="common-app">
+			<div class="qrcode">
+				<img src="img/logo-xiaopu.png">
+				<div>
+					<p>校谱</p>
+					<p>不做宅一族</p>
+				</div>
+			</div>
+			<div class="download-wrap">
+				<button class="app-open">打开</button>
+				<button class="app-download">下载</button>
+			</div>
+		</nav>
+
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/template.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/util.js"></script>
+		<script src="js/compare.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+	<html>

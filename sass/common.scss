@@ -1,0 +1,177 @@
+html,
+body {
+    font-family: "SimHei";
+}
+.common-header {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    height: 80px;
+    width: 750px;
+    border-bottom: 1px solid #989898;
+    background: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    .common-imgWrap1 {
+        margin-top: 20px;
+        margin-left: 30px;
+    }
+    .common-title {
+        font-size: 36px;
+        color: #000000;
+        margin-top: 14px;
+    }
+    .common-imgWrap2 {
+        margin-top: 20px;
+        margin-right: 30px;
+    }
+}
+.common-footer {
+    height: 96px;
+    width: 750px;
+    border-top: 2px solid #989898;
+    background: #fff;
+    position: fixed;
+    z-index: 999;
+    bottom: 0;
+    text-align: center;
+    line-height: 96px;
+    color: #885f44;
+}
+.common-mask {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    position: absolute;
+    display: none;
+}
+.common-voteRule {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 630px;
+    background: #FFFFFF;
+    font-size: 26px;
+}
+.common-voteRule .voteRule-closeImg {
+    position: absolute;
+    right: -25px;
+    top: -25px;
+}
+.common-voteRule .voteRule-title {
+    font-size: 30px;
+    text-align: center;
+    height: 80px;
+    line-height: 80px;
+    font-weight: bold;
+    border-bottom: 1px solid #E3E3E3;
+}
+.common-voteRule .voteRule-content {
+    margin-left: 60px;
+    overflow: scroll;
+    height: 500px;
+    position: relative;
+}
+.common-voteRule .voteRule-content .rule1 {
+    margin-top: 40px;
+}
+.common-voteRule .voteRule-content .rule2 {
+    margin-top: 40px;
+}
+.common-voteRule .voteRule-content .rule3 {
+    margin-top: 40px;
+}
+.common-voteRule .voteRule-content .rule4 {
+    margin-top: 20px;
+    margin-left: 115px;
+}
+.common-voteRule .voteRule-content .rule5 {
+    margin-top: 20px;
+    margin-left: 179px;
+}
+.common-voteRule .voteRule-content .rule6 {
+    margin-top: 40px;
+}
+.voteRule-content>span {
+    display: inline-block;
+    background-size: contain;
+    height: 80px;
+    width: 80px;
+    background-repeat: no-repeat;
+    background-image: url("../img/ok.png");
+    position: absolute;
+    top: 40px;
+    right: 40px;
+}
+.common-app {
+    position: fixed;
+    bottom: 0;
+    height: 138px;
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid #efefef;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    .qrcode {
+        margin-top: 43px;
+        img {
+            width: 75px;
+            height: 75px;
+            display: inline-block;
+            float: left;
+            margin-left: 30px;
+        }
+        div {
+            display: inline-block;
+            margin-left: 13px;
+            p {
+                font-size: 30px;
+                line-height: 38px;
+            }
+        }
+    }
+    .download-wrap {
+        height: 106px;
+        text-align: center;
+        margin-right: 30px;
+        margin-top: 30px;
+        p {
+            text-align: center;
+            font-size: 32px;
+        }
+        button {
+            width: 170px;
+            height: 70px;
+            border-radius: 10px;
+            color: #000;
+            margin-top: 18px;
+            font-size: 32px;
+            border: none;
+        }
+        .app-open {
+            border: 1px solid #ffd800;
+            background: none;
+        }
+        .app-download {
+            background: #ffd800;
+        }
+    }
+}
+.toast {
+    background: rgba(0,0,0,0.7);
+    position: absolute;
+    z-index: 1000;
+    padding: 2px 16px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 28px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%); 
+    display: none;
+}

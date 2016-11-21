@@ -1,0 +1,26 @@
+{
+    "msg": "string",
+    "obj": {
+        "endTime": "2016-11-14T06:05:52.042Z",
+        "isValid": 0,
+        "prizeName": "1亿元",
+        "prizeType": 3,
+        "rewardType": 0,
+        "rule": "string",
+        "ruleMap": {},
+        "slogan": "冰桶挑战谁最疯",
+        "topicId": 0
+    },
+    "path": {
+        "endTime": "2016-11-14T06:05:52.042Z",
+        "isValid": 0,
+        "prizeName": "string",
+        "prizeType": 0,
+        "rewardType": 0,
+        "rule": "string",
+        "ruleMap": {},
+        "slogan": "string",
+        "topicId": 0
+    },
+    "resultCode": 0
+}

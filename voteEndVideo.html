@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="target-densitydpi=device-dpi,width=750,user-scalable=no" name="viewport">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no, email=no" />
+		<meta name="msapplication-tap-highlight" content="no">
+		<link rel="stylesheet" type="text/css" href="css/voteEnd.css" />
+		<title>视频活动结束页面</title>
+	</head>
+
+	<body>
+		<!--header-->
+		<header class="common-header">
+			<div class="common-imgWrap1">
+				<img src="img/fanhui@2x.png" />
+			</div>
+			<p class="common-title">谁是手绘达人</p>
+			<div class="common-imgWrap2">
+				<img src="img/share@2x.png" />
+			</div>
+		</header>
+		<!--content-->
+		<section class="vote-end-main content">
+			<!--<script id="voteEndHead" type="text/html">-->
+			<p class="vote-end-imgNum">投票已结束</p>
+			<!--头部banner区域-->
+			<div class="vote-end-picWrap" id="vote-end-picWrap2">
+				<img class="myHeadBg" src="img/2.png" />
+				<img class="vote-end-authorImg" src="img/user-img-1.jpg">
+				<div class="vote-end-details">
+					<div class="vote-end-author">
+						<p id="headName">双笙</p>
+						<p><span id="headNum">100</span>票</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="vote-end-nav">
+				<div class="praise"><span>25</span></div>
+				<div class="discuss"><span>32</span></div>
+				<div class="star"></div>
+			</div>
+			<!--</script>-->
+
+			<div class="vote-end-content">
+				<ul class="top-list">
+					<script id="topList" type="text/html">
+						{{each arr as value i}}
+						<li class="top-item {{value.voteClass}}" id="{{i}}">
+							<img src="{{value.imgsHostDomain+value.avatarUrl}}">
+							<div class="item-center">
+								<p><i class="cup"></i>{{i+1}} {{value.nickName}}</p>
+								<div><span style="width: {{value.voteCntNum}}%;"></span></div>
+							</div>
+							<div class="item-right">
+								<i class="vote"></i>
+								<span>{{value.voteCnt}}票</span>
+							</div>
+							<i class="item-icon"></i>
+						</li>
+						{{/each}}
+					</script>
+				</ul>
+
+				<div class="other-top-wrap">
+					<ul class="other-top clear">
+						<script id="otherList" type="text/html">
+							{{each arrOther as value i}}
+							<li class="other-item" id="{{i+3}}">
+								<img src="{{value.imgsHostDomain+value.avatarUrl}}">
+								<div>
+									<i></i>
+									<span>{{i+4}}</span>
+									<p>{{value.nickName}}</p>
+								</div>
+							</li>
+							{{/each}}
+						</script>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!--footer-->
+		<footer class="common-footer">
+			投票规则
+		</footer>
+
+		<div class="common-mask">
+			<!--投票规则界面-->
+			<div class="common-voteRule">
+				<img src="img/guanbi@2x.png" class="voteRule-closeImg" />
+				<p class="voteRule-title">投票规则</p>
+				<div class="voteRule-content">
+					<p class="rule1">投票主题:手绘挑战谁最美</p>
+					<p class="rule2">投票截止时间:<span>2016/11/11/24:00</span></p>
+					<p class="rule3">投票奖励:现金-1000元</p>
+					<p class="rule4">说明:此奖励在参加人数达到两人，</p>
+					<p class="rule5">投票人数达到50人生效</p>
+					<p class="rule6">奖励方式:最高者得</p>
+					<span></span>
+				</div>
+			</div>
+		</div>
+
+		<!------底部banner----->
+		<nav class="common-app">
+			<div class="qrcode">
+				<img src="img/logo-xiaopu.png">
+				<div>
+					<p>校谱</p>
+					<p>不做宅一族</p>
+				</div>
+			</div>
+			<div class="download-wrap">
+				<button class="app-open">打开</button>
+				<button class="app-download">下载</button>
+			</div>
+		</nav>
+		
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="js/util.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript">
+		var mypkId =decodeURI(GetQueryString("pkId"));
+			_getService({
+
+				//		模拟的数据
+				//		url: "mock/voteEnd.json",
+				//		type: "GET"
+
+				//		接口
+				url: api_url + "voteResult/list",
+				data: {
+					pkId: mypkId
+//					type: 2
+				}
+			}).then(function(data) {
+				console.log(data);
+				if(data.resultCode == 1 && !$.isEmptyObject(data.obj)&&data.obj.list.length!=0) {
+					var topList = data.obj.list.slice(0, 3);
+					var otherList = data.obj.list.slice(3, 999);
+					$(".myHeadBg").attr("src", data.obj.list[0].imgsHostDomain + data.obj.list[0].avatarUrl);
+					$(".vote-end-authorImg").attr("src", data.obj.list[0].imgsHostDomain + data.obj.list[0].avatarUrl);
+					$("#headName").text(data.obj.list[0].nickName);
+					$("#headNum").text(data.obj.list[0].voteCnt);
+					
+					for(var i in topList) {
+						topList[i].voteCntNum = topList[i].voteCnt / 100 * 100;
+						if(i == 0) {
+							topList[i].voteClass = "vote-end-first";
+						} else if(i == 1) {
+							topList[i].voteClass = "vote-end-second";
+						} else if(i == 2) {
+							topList[i].voteClass = "vote-end-third";
+						}
+					}
+					var tophtml = template('topList', {
+						"arr": topList
+					});
+					$(".top-list").html(tophtml);
+					var otherhtml = template('otherList', {
+						"arrOther": otherList
+					});
+					$(".other-top").html(otherhtml);
+				} else {
+					toast("请求失败");
+				}
+				return data;
+			}).then(function(data) {
+				$(".common-footer").on("touchstart", function() {
+					$(".common-mask").toggle();
+				});
+				$(".voteRule-closeImg").on("touchstart", function() {
+					$(".common-mask").toggle();
+				});
+				$(".vote-end-nav .star").on("touchstart", function() {
+					$(this).toggleClass("on");
+				});
+				$(".vote-end-nav .praise").on("touchstart", function() {
+					$(this).toggleClass("on");
+				});
+				$(".other-top").css({
+					"width": $(".other-top").find("li").length * 148 + "px"
+				})
+
+				$(".common-app .close").on("touchstart", function() {
+					$(".common-app").toggle();
+				});
+				$(".top-list li,.other-top li").on("touchstart", function() {
+					console.log($(this).attr("id"));
+					var id = $(this).attr("id");
+					$(".myHeadBg").attr("src", data.obj.list[id].imgsHostDomain + data.obj.list[id].avatarUrl);
+					$(".vote-end-authorImg").attr("src", data.obj.list[id].imgsHostDomain + data.obj.list[id].avatarUrl);
+					$("#headName").text(data.obj.list[id].nickName);
+					$("#headNum").text(data.obj.list[id].voteCnt);
+				})
+
+			}).catch(function(err) {
+				console.log(err);
+			});
+		</script>
+	</body>
+	<html>

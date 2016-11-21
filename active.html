@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta content="target-densitydpi=device-dpi,width=750,user-scalable=no" name="viewport">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no, email=no" />
+	<meta name="msapplication-tap-highlight" content="no">
+	<link rel="stylesheet" type="text/css" href="css/active.css" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	
+	<title>Title</title>
+	<style type="text/css">
+		/*#main-wrap1,#main-wrap2,#main-wrap3 :target{
+		z-index: 1;
+	}*/
+	</style>
+</head>
+
+<body> 
+	<div class="active-header">
+		<div class="header-title">
+			<div class="img-wrap">
+				<img src="img/fanhui@2x.png" />
+			</div>
+			<p class="active-titleName">活动排行榜</p>
+		</div>
+		<div class="header-subfield">
+			<ul class="subfield-wrap">
+				<li class="subfield-list" id="subfield-list1">日榜</li>
+				<li class="subfield-list" id="subfield-list2">周榜</li>
+				<li class="subfield-list" id="subfield-list3">月榜</li>
+			</ul>
+		</div>
+	</div>
+	
+	<!--loading-->
+	<div class="active-loadingWrap">
+		<div class="spinner">
+		  <div class="rect1"></div>
+		  <div class="rect2"></div>
+		  <div class="rect3"></div>
+		  <div class="rect4"></div>
+		  <div class="rect5"></div>
+		</div>
+	</div>
+	<div class="main-warp1" id="main-wrap1">
+		<script id="activeList" type="text/html">
+			{{each myArr as value i}}
+			<div class="active-contentWrap">
+				<div class="contentImg-wrap" >
+					<div class="active-imgMask">
+						<div class="active-messageWrap">
+							<p class="active-name">{{value.subject}}</p>
+							<p class="active-endTime">截止日期：{{value.endTime}}</p>
+						</div>
+					</div>
+					<div class="rank-wrap">
+						<img src="img/qiyupaiming1@3x.png" class="actimg-01" />
+						<p>{{value.rank}}</p>
+					</div>					
+					<div class="active-backImg" style="background-image:url(http://imgs.chinaxiaopu.top/{{value.posterImg}});">
+
+					</div>
+					
+				</div>
+				
+			</div>
+			{{/each}}
+
+		</script>
+
+	</div>
+
+	<!--yue-->
+	<div class="main-warp2" id="main-wrap2">
+		<script id="activeList2" type="text/html">
+			{{each myArr as value i}}
+			<div class="active-contentWrap">
+				<div class="contentImg-wrap" >
+					<div class="active-imgMask">
+						<div class="active-messageWrap">
+							<p class="active-name">{{value.subject}}</p>
+							<p class="active-endTime">截止日期：{{value.endTime}}</p>
+						</div>
+					</div>
+					<div class="rank-wrap">
+						<img src="img/qiyupaiming1@3x.png" class="actimg-02" />
+						<p>{{value.rank}}</p>
+					</div>					
+					<div class="active-backImg" style="background-image:url(http://imgs.chinaxiaopu.top/{{value.posterImg}});">
+
+					</div>
+					
+				</div>
+				
+			</div>
+			{{/each}}
+
+		</script>
+	</div>
+
+	<!--zhou-->
+	<div class="main-warp3" id="main-wrap3">
+		<script id="activeList3" type="text/html">
+			{{each myArr as value i}}
+			<div class="active-contentWrap">
+				<div class="contentImg-wrap" >
+					<div class="active-imgMask">
+						<div class="active-messageWrap">
+							<p class="active-name">{{value.subject}}</p>
+							<p class="active-endTime">截止日期：{{value.endTime}}</p>
+						</div>
+					</div>
+					<div class="rank-wrap">
+						<img src="img/qiyupaiming1@3x.png" class="actimg-03" />
+						<p>{{value.rank}}</p>
+					</div>					
+					<div class="active-backImg" style="background-image:url(http://imgs.chinaxiaopu.top/{{value.posterImg}});">
+
+					</div>
+					
+				</div>
+				
+			</div>
+			{{/each}}
+
+		</script>
+	</div>
+	
+	
+	<!------底部banner----->
+		<nav class="common-app">
+			<div class="qrcode">
+				<img src="img/logo-xiaopu.png">
+				<div>
+					<p>校谱</p>
+					<p>不做宅一族</p>
+				</div>
+			</div>
+			<div class="download-wrap">
+				<button class="app-open">打开</button>
+				<button class="app-download">下载</button>
+			</div>
+		</nav>
+
+	<script>
+		;
+		(function(window) {
+			var viewport = document.documentElement.querySelector('meta[name="viewport"]');
+			var initWidth = viewport.content.match(/width=([\d]{3})/);
+			var a = +initWidth[1];
+			var b = window.innerWidth || a,
+				c = window.outerHeight || b,
+				d = window.screen.width || b,
+				e = window.screen.availWidth || b,
+				g = window.innerHeight || a,
+				h = window.outerHeight || g,
+				i = window.screen.height || g,
+				j = window.screen.availHeight || g,
+				k = Math.min(b, c, d, e, g, h, i, j),
+				L = k / a,
+				m = window.devicePixelRatio,
+				L = Math.min(L, m);
+			var device = window.navigator.userAgent;
+			if(device.match(/Android/gi)) {
+				window.device = 'android';
+				document.body.className += ' android';
+				viewport.setAttribute('content',
+					'width=' + a + ' initial-scale=' + L + ' maximum-scale=' + L + ' user-scalable=no'
+				)
+			} else if(device.match(/iPhone|iPad/gi)) {
+				window.device = 'ios';
+				viewport.setAttribute('content',
+					'width=' + a + ' user-scalable=no'
+				)
+			}
+			// 判断微信
+			if(device.match(/MicroMessenger/gi)) {
+				document.body.className += ' weixin';
+			}
+		})(window);
+	</script>
+	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/active.js" type="text/javascript" charset="utf-8"></script>
+
+</body>
+<html>

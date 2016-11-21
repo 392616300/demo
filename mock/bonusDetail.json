@@ -1,0 +1,14 @@
+{"resultCode": 1, 
+"msg": null, 
+"obj": {
+"prizeId":1,
+"prize":[],
+"prizeName":"马克杯",
+"prizeNum":100,
+"topicId":"主题ID",
+"topicSlogan":"通过不服谁是最搞笑的人获得冠军",
+"hasTake":true,
+"code":"img/qrcode.png"}, 
+"path": null}
+
+

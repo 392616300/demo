@@ -1,0 +1,511 @@
+@import 'reset';
+@import 'common';
+body {
+    background: #efefef;
+    font-size: 32px;
+}
+.vote-end-main {
+    position: fixed;
+    overflow: scroll;
+    top: 80px;
+    bottom: 0;
+    width: 750px;
+    margin-bottom: 80px;
+}
+.vote-end-main .vote-end-imgNum {
+    width: 750px;
+    height: 42px;
+    text-align: center;
+    font-size: 30px;
+    color: #000000;
+    line-height: 42px;
+    background: #efefef;
+}
+.vote-end-main .vote-end-picWrap {
+    width: 750px;
+    height: 500px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05), 0 5px 2px 0 rgba(0, 0, 0, 0.2), 0 10px 5px 0 white, 0 15px 3px 0 rgba(0, 0, 0, 0.25);
+}
+.vote-end-main .vote-end-picWrap .myHeadBg {
+    max-width: 750px;
+    height: 500px;
+}
+.vote-end-main .vote-end-picWrap .vote-end-voteImg {
+    margin-left: 20px;
+    margin-top: 17px;
+}
+.vote-end-details {
+    width: 750px;
+    height: 70px;
+    background: rgba(0, 0, 0, 0.03);
+    position: absolute;
+    bottom: 0;
+    display: flex;
+}
+.vote-end-details .vote-end-author {
+    color: #FFFFFF;
+    font-size: 26px;
+    display: flex;
+    width: 610px;
+    justify-content: space-between;
+    margin-left: 140px;
+    line-height: 70px;
+    &>p {
+        font-size: 30px;
+    }
+    &>p:last-child {
+        margin-right: 35px;
+    }
+}
+.vote-end-details .vote-end-author .vote-end-vateNum {
+    margin-right: 30px;
+}
+.vote-end-authorImg {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-left: 30px;
+    display: block;
+    position: absolute;
+    bottom: 10px;
+}
+.vote-end-nav {
+    margin-top: 19px;
+    background: #fff;
+    display: flex;
+    position: relative;
+    &>div {
+        background-size: contain;
+        height: 40px;
+        width: 120px;
+        background-position: left;
+        background-repeat: no-repeat;
+        margin: 15px 0;
+        span {
+            margin-left: 50px;
+            font-size: 26px;
+        }
+    }
+    .praise {
+        background-image: url("../img/DZ@3x.png");
+        margin-left: 30px;
+    }
+    .praise.on {
+        background-image: url("../img/x@3x.png");
+    }
+    .discuss {
+        background-image: url("../img/pl@3x.png");
+    }
+    .star {
+        background-image: url("../img/sc@3x.png");
+    }
+    .star.on {
+        background-image: url("../img/SC2@3x.png");
+    }
+    .vote {
+        background-image: url("../img/shipingtoupiao@3x.png");
+        width: 110px;
+        height: 110px;
+        position: absolute;
+        right: 170px;
+        top: -74px;
+    }
+    .ding {
+        background-image: url("../img/ding@3x.png");
+        width: 80px;
+        height: 80px;
+        position: absolute;
+        right: 30px;
+        top: -52px;
+    }
+}
+.vote-end-content {
+    background: #fff;
+    margin-top: 16px;
+    padding-top: 20px;
+    .top-list {
+        margin: 20px 30px;
+        .top-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            img {
+                width: 92px;
+                height: 92px;
+                display: inline-block;
+                border-radius: 50px;
+                border: 6px solid #f7f7f7;
+            }
+            .item-center {
+                margin-left: 30px;
+                i {
+                    display: inline-block;
+                    background-size: contain;
+                    height: 40px;
+                    width: 40px;
+                    background-repeat: no-repeat;
+                }
+                .cup {
+                    background-image: url("../img/guanjun@3x.png");
+                    vertical-align: top;
+                    margin-right: 22px;
+                }
+                p {
+                    font-size: 30px;
+                    color: #fd4e4e;
+                       
+                }
+                div {
+                    background: #f9f9f9;
+                    height: 16px;
+                    width: 400px;
+                    border-radius: 8px;
+                    position: relative;
+                    margin-top: 10px;
+                    span {
+                        height: 16px;
+                        background: #fd4e4e;
+                        display: inline-block;
+                        border-radius: 8px;
+                        position: absolute;
+                    }
+                }
+            }
+            .item-right {
+                .vote {
+                    background-image: url("../img/paihangtoupiao@3x.png");
+                    display: block;
+                    background-size: contain;
+                    height: 40px;
+                    width: 40px;
+                    background-repeat: no-repeat;
+                }
+                span {
+                    font-size: 20px;
+                }
+            }
+        }
+         .vote-end-first{
+            .item-icon {
+                background-image: url("../img/ry@3x.png");
+                display: block;
+                background-size: contain;
+                height: 80px;
+                width: 80px;
+                background-repeat: no-repeat;
+            }
+        }
+        .top-item.vote-end-second {
+            .item-center {
+                .cup {
+                    background-image: url("../img/dier@3x.png");
+                }
+                p {
+                    color: #f5a93d;
+                }
+                div {
+                    span {
+                        background: #f5a93d;
+                    }
+                }
+            }
+        }
+        .top-item.vote-end-third {
+            .item-center {
+                .cup {
+                    background-image: url("../img/disan@3x.png");
+                }
+                p {
+                    color: #f2d116;
+                }
+                div {
+                    span {
+                        background: #f2d116;
+                    }
+                }
+            }
+        }
+    }
+    .other-top {
+        margin: 20px 30px;
+        overflow-x: scroll;
+        width: 3000px;
+        height: 170px;
+        .other-item {
+            margin-right: 56px;
+            width: 92px;
+            float: left;
+            height: 170px;
+            overflow: hidden;
+            img {
+                width: 92px;
+                height: 92px;
+                display: inline-block;
+                border-radius: 50px;
+                border: 6px solid #f7f7f7;
+            }
+            &>div {
+                font-size: 30px;
+                i {
+                    display: inline-block;
+                    background-size: contain;
+                    height: 40px;
+                    width: 40px;
+                    background-repeat: no-repeat;
+                    background-image: url("../img/qiyumingci@3x.png");
+                    vertical-align: middle;
+                }
+                p {
+                    text-align: center;
+                    margin-top: 15px;
+                }
+            }
+        }
+    }
+    .other-top-wrap {
+        width: 750px;
+        overflow: scroll;
+            margin-bottom: 120px;
+    }
+    .other-top-wrap::-webkit-scrollbar {
+        background: none;
+    }
+    .other-top::-webkit-scrollbar {
+        background: none;
+    }
+}
+//myVideo
+.myVideo {
+    background: #fff;
+    position: relative;
+    
+    .user-logo{
+    display: flex;
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    
+}
+.user-logo img{
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        vertical-align: middle;
+    }
+    .user-logo .user-name{
+        font-size: 32px;
+        margin-left: 20px;
+        line-height: 50px;
+        
+    }
+        .user-logo .user-time{
+        font-size: 20px;
+        margin-left: 20px;
+        
+    }
+    .video-wrap {
+        position: absolute;
+        top: 40%;
+        transform: translateY(-40%);
+    }
+    .main-text {
+        text-align: left;
+        color: #000;
+        font-size: 30px;
+        position: absolute;
+        top: 70%;
+        width: 600px;
+        margin-left: 20px;
+    }
+    .praise {
+        background-size: contain;
+        height: 40px;
+        width: 120px;
+        background-position: left;
+        background-repeat: no-repeat;
+        margin: 15px 0;
+        background-image: url("../img/praise.png");
+        margin-left: 30px;
+        position: absolute;
+        right: -20px;
+        top: 70%;
+    }
+    .btnPlay {
+        width: 80px;
+        height: 80px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: none;
+    }
+    .btnPlay.play {
+        background-image: url("../img/play.png");
+    }
+    .btnPlay.pause {
+        background-image: url("../img/pause.png");
+    }
+}
+//ranklist
+#rankList .top-item .item-center {
+    width: 400px;
+    line-height: 92px;
+}
+#rankList .top-item .item-center .cup {
+    vertical-align: middle;
+    margin-right: 22px;
+    margin-bottom: 10px;
+}
+#rankList .top-item .item-right {
+    line-height: 92px;
+}
+#rankList .top-item .item-right span {
+    font-size: 30px;
+    color: #f6e64b;
+}
+#rankList ul li {
+    border-bottom: 1px solid #989898;
+    padding: 20px 30px;
+}
+#rankList ul li:last-child {
+    border-bottom: none;
+}
+#rankList .top-list {
+    margin: 0;
+}
+.vote-end-content .top-list .top-item.vote-end-other .item-center .cup {
+    background-image: url("../img/qiyumingci@3x.png");
+}
+#rankList .top-item .item-center p {
+    display: inline-block;
+    color: #fd4e4e;
+}
+#rankList .top-item.vote-end-other .item-center p {
+    color: #000;
+}
+#rankList .top-item .item-center {
+    margin-left: 0;
+}
+.compare-video-main {
+    width: 750px;
+    max-height: 750px;
+}
+#compareVideo {
+    background: #fff;
+    .vote-end-nav {
+        margin-top: -13px;
+    }
+}
+.compare-nav {
+    display: flex;
+    justify-content: space-between;
+    margin: 100px 30px 16px;
+    .nav-left {
+        img {
+            width: 92px;
+            height: 92px;
+            display: inline-block;
+            border-radius: 50px;
+            border: 6px solid #f7f7f7;
+        }
+        div {
+            display: inline-block;
+            font-size: 30px;
+            color: #000;
+            vertical-align: middle;
+            p:last-child {
+                font-size: 22px;
+                color: #989898;
+            }
+        }
+    }
+    .nav-right {
+        position: relative;
+        img {
+            width: 92px;
+            height: 92px;
+            display: inline-block;
+            border-radius: 50%;
+            border: 6px solid #f7f7f7;
+        }
+        span {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: red;
+            color: #fff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            font-size: 20px;
+            text-align: center;
+        }
+    }
+}
+.other-video {
+    border-top: 10px solid #F7F7F7;
+    width: 750px;
+        margin-bottom: 400px;
+    ul {
+        margin: 20px 0;
+        li {
+            float: left;
+            width: 242px;
+            height: 204px;
+            border: 3px solid #f7f7f7;
+            margin-right: 10px;
+            position: relative;
+            .bg {
+                width: 242px;
+                height: 204px;
+            }
+            p {
+                position: absolute;
+                bottom: -6px;
+                height: 50px;
+                width: 242px;
+                background: rgba(0,0,0,0.5);
+                color: #fff;
+                line-height: 50px;
+                text-align: center;
+            }
+            .user-logo {
+                position: absolute;
+                height: 70px;
+                width: 70px;
+                bottom: 20px;
+                left: 30px;
+                border-radius: 50%;
+                z-index: 9;
+            }
+            span {
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+            .left-tips {
+                position: absolute;
+                height: 68px;
+                width: 40px;
+                background-image: url("../img/dier1@3x.png");
+                top: -3px;
+                left: -3px;
+            }
+            .right-tips {
+                position: absolute;
+                height: 108px;
+                width: 54px;
+                right: -6px;
+                top: 0;
+                background-image: url("../img/lz@3x.png");
+            }
+        }
+        li:last-child {
+            margin-right: 0;
+        }
+    }
+}

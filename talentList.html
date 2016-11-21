@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="target-densitydpi=device-dpi,width=750,user-scalable=no" name="viewport">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no, email=no" />
+		<meta name="msapplication-tap-highlight" content="no">
+		<link rel="stylesheet" type="text/css" href="css/voteEnd.css" />
+		<title>达人榜</title>
+	</head>
+
+	<body>
+		<!--header-->
+		<header class="common-header">
+			<div class="common-imgWrap1">
+				<img src="img/fanhui@2x.png" />
+			</div>
+			<p class="common-title">达人榜</p>
+			<div class="common-imgWrap2">
+				<img src="img/share@2x.png" />
+			</div>
+		</header>
+		<!--content-->
+		<section class="vote-end-main content" id="rankList">
+			<div class="vote-end-content">
+				<ul class="top-list">
+
+					<script id="talentList" type="text/html">
+						{{each obj as value i}}
+
+						<li class="top-item {{value.voteClass}}" id="{{value.userId}}">
+							<div class="item-center">
+								<img src="{{value.path+value.userAvatarUrl}}">
+								<p><i class="cup"></i>{{i+1}} {{value.userNickname}}</p>
+							</div>
+							<div class="item-right">
+								<span>{{value.voteCnt}}</span>人参与
+							</div>
+						</li>
+						{{/each}}
+					</script>
+				</ul>
+			</div>
+		</section>
+
+		<!------底部banner----->
+		<nav class="common-app">
+			<div class="qrcode">
+				<img src="img/logo-xiaopu.png">
+				<div>
+					<p>校谱</p>
+					<p>不做宅一族</p>
+				</div>
+			</div>
+			<div class="download-wrap">
+				<button class="app-open">打开</button>
+				<button class="app-download">下载</button>
+			</div>
+		</nav>
+		
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="js/util.js"></script>
+		<!--<script type="text/javascript" src="js/voteEnd.js"></script>-->
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript">
+		var myuserRank =decodeURI(GetQueryString("userRank"));
+			_getService({		
+				//模拟数据
+//				url: "mock/talentList.json",
+//				type: "GET"
+				
+				//接口				
+				url: api_url +"ranking/userVote/talentList",
+				data:{userRank:myuserRank}
+			}).then(function(data) {
+				console.log(data);
+				if(data.resultCode == 1 && !$.isEmptyObject(data.obj)) {
+					for(var i in data.obj) {
+						if(i == 0) {
+							data.obj[i].voteClass = "vote-end-first";
+						} else if(i == 1) {
+							data.obj[i].voteClass = "vote-end-second";
+						} else if(i == 2) {
+							data.obj[i].voteClass = "vote-end-third";
+						} else {
+							data.obj[i].voteClass = "vote-end-other";
+						}
+					}
+					var html = template('talentList', data);
+					$(".top-list").html(html);
+				} else {
+					toast("请求失败");
+				}
+			}).catch(function(err) {
+				console.log(err);
+			});
+			$(".app-open").on("touchstart", function() {
+				toast("打开app按钮");
+			})
+			$(".app-download").on("touchstart", function() {
+				toast("下载app按钮");
+			});
+			
+			//-------------微信分享
+			shareTitle = '[校谱]达人榜排行榜';
+			shareDesc = "不服来战，欢迎挑战";
+			shareImg = host_url + "img/wxShare.png";
+			xiaopuJsShare();
+		</script>
+	</body>
+	<html>

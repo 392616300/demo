@@ -1,0 +1,72 @@
+{
+  "msg": "string",
+  "obj": {
+    "commentCnt": 0,
+    "content": ["img/swiper-1.jpg","img/swiper-2.jpg","img/swiper-1.jpg","img/swiper-2.jpg"],
+    "contentMap": {},
+    "createTime": "2016-11-11T06:38:22.101Z",
+    "creatorAvatar": "string",
+    "creatorId": 0,
+    "creatorNickname": "string",
+    "eventList": [
+      {
+        "id": 0,
+        "name": "string",
+        "topicId": 0
+      }
+    ],
+    "favoriteCnt": 0,
+    "groupList": [
+      {
+        "id": 0,
+        "name": "string",
+        "topicId": 0
+      }
+    ],
+    "imgsHostDomain": "string",
+    "isFav": 0,
+    "isLike": 0,
+    "isOfficial": 0,
+    "isPk": 0,
+    "likeCnt": 0,
+    "showTime": "string",
+    "topicId": 0,
+    "type": 0,
+    "voteCnt": 0
+  },
+  "path": {
+    "commentCnt": 0,
+    "content": "string",
+    "contentMap": {},
+    "createTime": "2016-11-11T06:38:22.101Z",
+    "creatorAvatar": "string",
+    "creatorId": 0,
+    "creatorNickname": "string",
+    "eventList": [
+      {
+        "id": 0,
+        "name": "string",
+        "topicId": 0
+      }
+    ],
+    "favoriteCnt": 0,
+    "groupList": [
+      {
+        "id": 0,
+        "name": "string",
+        "topicId": 0
+      }
+    ],
+    "imgsHostDomain": "string",
+    "isFav": 0,
+    "isLike": 0,
+    "isOfficial": 0,
+    "isPk": 0,
+    "likeCnt": 0,
+    "showTime": "string",
+    "topicId": 0,
+    "type": 0,
+    "voteCnt": 0
+  },
+  "resultCode": 1
+}

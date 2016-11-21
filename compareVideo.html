@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="target-densitydpi=device-dpi,width=750,user-scalable=no" name="viewport">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no, email=no" />
+		<meta name="msapplication-tap-highlight" content="no">
+		<link rel="stylesheet" type="text/css" href="css/voteEnd.css" />
+		<title>视频比较页面</title>
+	</head>
+
+	<body id="compareVideo">
+		<!--header-->
+		<header class="common-header">
+			<div class="common-imgWrap1">
+				<img src="img/fanhui@2x.png" />
+			</div>
+			<p class="common-title">视频比较页面</p>
+			<div class="common-imgWrap2">
+				<img src="img/share@2x.png" />
+			</div>
+		</header>
+		<!--content-->
+		<article style="position: absolute;overflow: scroll;">
+			<section class="compare-nav">
+				<div class="nav-left">
+					<img src="img/user-img-1.jpg" />
+					<div>
+						<p id="createName">校谱</p>
+						<p>当前得票<span id="voteCnt">112</span>票</p>
+					</div>
+				</div>
+			</section>
+			<section class="compare-video-main">
+				<video width="750" height="500" controls poster="img/2.png" id="videoId" src=""></video>
+			</section>
+			<section class="vote-end-nav">
+				<div class="praise"><span>25</span></div>
+				<div class="discuss"><span>32</span></div>
+				<div class="star"></div>
+				<div class="vote"></div>
+				<div class="ding"></div>
+			</section>
+			<section class="other-video">
+				<ul class="other-video-ul">
+					<script id="otherList" type="text/html">
+						{{each list as value i}}
+						<li>
+							<img class="bg" src="{{value.imgsHostDomain+value.contentMap.urls[1]}}" />
+							<span class="left-tips"></span> {{if value.isPk}}
+							<span class="right-tips"></span> {{/if}}
+							<img class="user-logo" src="{{value.imgsHostDomain+value.creatorAvatar}}">
+							<p>{{value.creatorNickname}}</p>
+						</li>
+						{{/each}}
+					</script>
+				</ul>
+			</section>
+		</article>
+
+		<!------底部banner----->
+		<nav class="common-app">
+			<div class="qrcode">
+				<img src="img/logo-xiaopu.png">
+				<div>
+					<p>校谱</p>
+					<p>不做宅一族</p>
+				</div>
+			</div>
+			<div class="download-wrap">
+				<button class="app-open">打开</button>
+				<button class="app-download">下载</button>
+			</div>
+		</nav>
+
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="js/util.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript">
+			var myTopicId = decodeURI(GetQueryString("topicId"));
+			var myTitle = decodeURI(GetQueryString("title"));
+			_getService({
+
+				//		模拟的数据
+				//		url: "mock/voteEnd.json",
+				//		type: "GET"
+
+				//		接口
+				url: "http://api.chinaxiaopu.top/topicPk/voteContext",
+				data: {
+					topicId: myTopicId
+				}
+			}).then(function(data) {
+
+				if(data.resultCode == 1 && !$.isEmptyObject(data.obj) && !$.isEmptyObject(data.obj.topicVo)) {
+					data.obj.list.unshift(data.obj.topicVo);
+					console.log(data);
+					var otherhtml = template('otherList', data.obj);
+					$(".other-video-ul").html(otherhtml);
+					var firstObj = data.obj.topicVo;
+					$("#videoId").attr("poster", data.obj.imgsHostDomain + firstObj.contentMap.urls[1]);
+					$("#videoId").attr("src", data.obj.imgsHostDomain + firstObj.contentMap.urls[0]);
+					$(".nav-left img").attr("src", data.obj.imgsHostDomain + firstObj.creatorAvatar);
+					$("#createName").text(firstObj.creatorNickname);
+					$("#voteCnt").text(firstObj.voteCnt);
+					$(".praise span").text(firstObj.likeCnt);
+					if(!firstObj.isPk) {
+						$(".vote-end-nav .vote").hide();
+					}
+				} else {
+					toast("请求失败");
+				}
+			}).catch(function(err) {
+				console.log(err);
+			});
+			
+		//-------------微信分享
+		shareTitle = '[校谱]我分享了“'+myTitle+'“的视频-不服来战';
+		shareDesc = "投票奖励：现金100元   说明：此奖励在参加人数...";
+		shareImg = host_url + "img/wxShare.png";
+		xiaopuJsShare();
+		</script>
+
+	</body>
+	<html>

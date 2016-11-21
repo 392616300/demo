@@ -1,0 +1,30 @@
+
+.list-Wrap {
+  height: 100%;
+  margin-top: 122px;
+}
+.money-list {
+  width: 750px;
+  font-size: 50px;
+}
+.money-list li {
+  width: 750px;
+  height: 116px;
+  font-size: 26px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #e3e3e3;
+  position: relative;
+}
+.money-list li div {
+  padding-top: 25px;
+}
+.money-list li p {
+  line-height: 35px;
+  margin-left: 30px;
+}
+.money-list .moneyNum {
+  position: absolute;
+  right: 30px;
+  top: 45px;
+  color: #f5a93d;
+}

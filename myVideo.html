@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="target-densitydpi=device-dpi,width=750,user-scalable=no" name="viewport">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no, email=no" />
+		<meta name="msapplication-tap-highlight" content="no">
+		<link rel="stylesheet" type="text/css" href="css/voteEnd.css" />
+		<title>视频详情分享页面</title>
+	</head>
+
+	<body class="myVideo">
+		<div class="user-logo">
+				<img src="img/user-img-4.jpg"/>
+				<div>
+					<p class="user-name">校谱</p>
+					<p class="user-time"></p>
+				</div>
+			</div>
+		<div class="video-wrap">
+			<video width="750" height="500" controls poster="#" id="videoId" src="">
+			</video>
+			<!--<div class="btnPlay play"></div>-->
+		</div>
+		<div class="text-wrap">
+			<div class="main-text">校谱有你更精彩</div>
+			<div class="praise"></div>
+		</div>
+
+		<!------底部banner----->
+		<nav class="common-app">
+			<div class="qrcode">
+				<img src="img/logo-xiaopu.png">
+				<div>
+					<p>校谱</p>
+					<p>不做宅一族</p>
+				</div>
+			</div>
+			<div class="download-wrap">
+				<button class="app-open">打开</button>
+				<button class="app-download">下载</button>
+			</div>
+		</nav>
+		
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="js/util.js"></script>
+		<script type="text/javascript">
+			//		自动播放
+			//		var Media=document.getElementById("videoId");
+			//  		Media.play(); 
+
+			var myTopicId = decodeURI(GetQueryString("topicId"));
+			_getService({
+				//				模拟数据
+				//				url: "mock/myDetail.json",
+				//				type: "GET"
+				//				接口
+				url: api_url + "topic/view",
+				data: {
+					topicId: myTopicId
+				}
+			}).then(function(data) {
+				console.log(data);
+				if(data.resultCode == 1 && data.obj.type == 2 && !$.isEmptyObject(data.obj) && !$.isEmptyObject(data.obj.contentMap) && data.obj.contentMap.urls.length != 0) {
+					$("#videoId").attr("src", data.obj.imgsHostDomain + data.obj.contentMap.urls[0]);
+					$("#videoId").attr("poster", data.obj.imgsHostDomain + data.obj.contentMap.urls[1])
+					$(".main-text").text(data.obj.contentMap.desc);
+					$(".user-logo img").attr("src",data.obj.imgsHostDomain+data.obj.creatorAvatar);
+					$(".user-name").text(data.obj.creatorNickname);
+					$(".user-time").text(data.obj.showTime);
+				} else {
+					toast("请求失败");
+				}
+				//-------------微信分享
+				shareTitle = "[校谱]我分享了“"+data.obj.creatorNickname+"“的视频";
+				shareDesc = "这是我的本月佳作（"+data.obj.contentMap.desc+"）";
+				shareImg = host_url + "img/wxShare.png";
+				xiaopuJsShare();
+			}).then(function() {
+				var video = $('#videoId');
+				video.on("touchstart", function() {
+					$(".btnPlay").toggle();
+				})
+				$('.btnPlay').on('click', function() {
+					if(video[0].paused) {
+						$(".btnPlay").removeClass("play").addClass("pause");
+						video[0].play();
+
+					} else {
+						$(".btnPlay").removeClass("pause").addClass("play");
+						video[0].pause();
+					}
+					return false;
+				});
+			}).catch(function(err) {
+				console.log(err);
+			});
+		</script>
+	</body>
+	<html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta content="target-densitydpi=device-dpi,width=750,user-scalable=no" name="viewport">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no, email=no" />
+		<meta name="msapplication-tap-highlight" content="no">
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script type="text/javascript" src="js/util.js"></script>
+		<title>点击下载应用</title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			body {
+				width: 100%;
+				height: 100%;
+				background: #ececec;
+			}
+			
+			a {
+				text-decoration: none;
+			}
+			
+			img {
+				max-width: 80%;
+				height: auto;
+			}
+			
+			.weixin-tip {
+				display: none;
+				position: fixed;
+				left: 0;
+				top: 0;
+				bottom: 0;
+				background: #fff;
+				filter: alpha(opacity=80);
+				height: 100%;
+				width: 100%;
+				z-index: 100;
+			}
+			
+			.weixin-tip p {
+				text-align: center;
+				margin-top: 10%;
+				padding: 0 5%;
+			}
+			
+			.App {
+				display: none;
+				background: url(img/tututu@3x.png)center bottom no-repeat;
+				width: 100%;
+				height: 100%;
+			}
+			
+			#download {
+				display: block;
+				width: 435px;
+				height: 110px;
+				background: url(img/download.png) no-repeat;
+				background-size: cover;
+				margin: 0 auto;
+			}
+			
+			#openApp {
+				display: block;
+				width: 435px;
+				height: 110px;
+				background: url(img/openapp.png) no-repeat;
+				background-size: cover;
+				margin: 80px auto 0 auto;
+			}
+			
+			.app-wrap {
+				position: absolute;
+				top: 20%;
+				left: 50%;
+				transform: translate(-50%);
+				-webkit-transform: translate(-50%);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="weixin-tip">
+			<p>
+				<img src="img/live_weixin.png" alt="微信打开" />
+			</p>
+		</div>
+		<div class="App">
+			<div class="app-wrap">
+				<a id="download"></a>
+				<a id="openApp" href="xpiOS://"></a>
+			</div>
+
+		</div>
+
+		<script type="text/javascript">
+			$(window).on("load", function() {
+				var winHeight = $(window).height();
+				$("body").css("height", winHeight);
+				//判断是否为微信浏览器
+				function is_weixin() {
+					var ua = navigator.userAgent.toLowerCase();
+					if(ua.match(/MicroMessenger/i) == "micromessenger") {
+						return true;
+					} else {
+						return false;
+					}
+				}
+				var isWeixin = is_weixin();
+				if(isWeixin) {
+					$(".weixin-tip").css("height", winHeight);
+					$(".weixin-tip").show();
+				} else {
+					console.log("不是微信");
+					$(".App").show();
+				}
+
+			
+				 //手机浏览器版本检测	
+				var browser = {
+					versions: function() {
+						var u = navigator.userAgent,
+							app = navigator.appVersion;
+						return { //移动终端浏览器版本信息 
+							trident: u.indexOf('Trident') > -1, //IE内核
+							presto: u.indexOf('Presto') > -1, //opera内核
+							webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+							gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+							mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端
+							ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+							android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+							iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+							iPad: u.indexOf('iPad') > -1, //是否iPad
+							webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+						};
+					}(),
+					language: (navigator.browserLanguage || navigator.language).toLowerCase()
+				}
+
+				if(browser.versions.ios || browser.versions.iPhone || browser.versions.iPad) {
+					$("#download").attr("href","https://itunes.apple.com/cn/app/xiao-pu-bu-zuo-zhai-yi-zu/id1166933526?mt=8");
+					$("#openApp").attr("href","xpiOS://");
+				} else if(browser.versions.android) {
+					$("#download").attr("href","http://downloads.chinaxiaopu.com/xiaopu.apk");
+					$("#openApp").attr("href","mobi.xiaopu://try");
+				}
+			})
+		</script>
+	</body>
+
+</html>
